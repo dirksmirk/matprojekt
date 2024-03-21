@@ -1,40 +1,44 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect /* useRef */ } from 'react'
 
 function Search() {
-    const [Food, setFood] = useState("")
+    const [Food, setFood] = useState(null)
 
-    const input = useRef()
+  /*   const input = useRef() */
 
     useEffect(() => {
-        fetch('www.themealdb.com/api/json/v1/1/search.php?s='+input)
+      fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=pilaf')
+        .then((response) => response.json())
+        .then(result => {
+          console.log(result)
+          setFood(result)
+        })
+    }, [])
+    
+    /* const getFood = () => {
+      const name = input.current.value
+        fetch(`www.themealdb.com/api/json/v1/1/search.php?s=pilaf`)
         .then((response) => response.json())
         .then((result) => setFood(result))
+    } */
     
-
-    }, []);
-    
-    return (
-        <>
-          {/* Display selected post if exists */}
-          {Food &&
-            <div className="card">
-              <p>Current Food title: {Food.title}</p>
-              <p>Current Food body: {Food.body}</p>
-            </div>
-          }
-          {/* Input for entering post ID */}
-          <input type="text" onInput={getPost} ref={input} placeholder="Enter an ID" />
-          <br /><br />
-          {/* Render mock data if available */}
-          {mockData.length > 0 && mockData.map((data, idx) => (
-            <div className="card" key={idx}>
-              {data.title} <br />
-              {data.body}
-            </div>
-          ))}
-        </>
-      )
-}
+    // return (
+    //   <>
+    //       {/* Display selected post if exists */}
+    //       {Food &&
+    //         <div className="card">
+    //           <p>Current Food title: {Food.title}</p>
+    //           <p>Current Food body: {Food.body}</p>
+    //         </div>
+    //       }
+    //       {/* Input for entering post ID */}
+    //       <input type="text" onInput={getFood} ref={input} placeholder="Enter an ID" />
+    //       <button  >Search</button>
+    //       <br /><br />
+    //       {/* Render mock data if available */}
+          
+    //     </>
+    //   )
+      }
 
 
 
