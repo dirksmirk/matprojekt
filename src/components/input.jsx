@@ -10,35 +10,32 @@ function Search() {
         .then((response) => response.json())
         .then((result) => setFood(result))
     
-      return () => {
-        second
-      }
-    }, [third])
+
+    }, []);
     
+    return (
+        <>
+          {/* Display selected post if exists */}
+          {Food &&
+            <div className="card">
+              <p>Current Food title: {Food.title}</p>
+              <p>Current Food body: {Food.body}</p>
+            </div>
+          }
+          {/* Input for entering post ID */}
+          <input type="text" onInput={getPost} ref={input} placeholder="Enter an ID" />
+          <br /><br />
+          {/* Render mock data if available */}
+          {mockData.length > 0 && mockData.map((data, idx) => (
+            <div className="card" key={idx}>
+              {data.title} <br />
+              {data.body}
+            </div>
+          ))}
+        </>
+      )
 }
 
 
-return (
-    <>
-      {/* Display selected post if exists */}
-      {post &&
-        <div className="card">
-          <p>Current post title: {post.title}</p>
-          <p>Current post body: {post.body}</p>
-        </div>
-      }
-      {/* Input for entering post ID */}
-      <input type="text" onInput={getPost} ref={myInput} placeholder="Enter an ID" />
-      <br /><br />
-      {/* Render mock data if available */}
-      {mockData.length > 0 && mockData.map((data, idx) => (
-        <div className="card" key={idx}>
-          {data.title} <br />
-          {data.body}
-        </div>
-      ))}
-    </>
-  )
-}
 
 export default Search
