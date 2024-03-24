@@ -1,13 +1,12 @@
 /* eslint-disable react/prop-types */
-const List = ({ Food }) => {
+const List = ({ Food, handleRecipeClick }) => {
 
-    console.log(Food)
     return (
         <>
-            {Food.meals.map((meal) => (
-                <div className='meal-preview' key={meal.idMeal}>
+            {Food.map((meal) => (
+                <div className='meal-list-preview' key={meal.idMeal}  onClick={() => handleRecipeClick(meal)} >
+                  <img src={meal.strMealThumb} alt="picture of food" />
                   <h2>{ meal.strMeal }</h2>
-                  <p>Contains: { meal.strIngredient1 }</p>
                 </div>
               ))
             }
