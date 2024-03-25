@@ -11,7 +11,7 @@ const MealMenu = ({ Recipe }) => {
   .map(key => Recipe[key])
   .filter(measure => measure.trim() !== '')
 
-  const ingredientMeasure = Object.keys(ingredients, measures).map((ingredient, measure) => `${ingredients[ingredient]} ${measures[measure]}`)
+  const ingredientMeasure = Object.keys(ingredients, measures).map((ingredient, measure) => `${ingredients[ingredient]} - ${measures[measure]}`)
 
 /*     const ingredentMeasure = Object.keys(Recipe)
   .filter(key => key.startsWith('strIngredient') && Recipe[key])
@@ -24,8 +24,9 @@ const MealMenu = ({ Recipe }) => {
   console.log(measures)
   console.log(ingredientMeasure)
 
-  const TagNull = 'mo tags';
+  const TagNull = 'no tags';
   const Tags = Recipe.strTags;
+
 
   //Våran return returnerar vårat recept inom en div.
   //Vi vill ha namnet på receptet högst up, följt utav en bild, följt utav en lista av ingredienser med deras måt och till sist beskrivningen av receptet
@@ -33,17 +34,17 @@ const MealMenu = ({ Recipe }) => {
     <>
       <div className='meal-recipe' key={Recipe.idMeal}>
         <h2>{Recipe.strMeal}</h2>
+        Category: {Recipe.strCategory}
         <br />
         <img src={Recipe.strMealThumb} alt='picture of food' />
         <br />
         Tags: {Recipe.strTags == null ? TagNull : Tags}
         <br />
         <h3>Ingredients:</h3>
-        <br />
         <ul>
           {ingredientMeasure.map((content, idx) => (
             <li key={idx}>
-              <p>Contains: {content} </p>
+              <p>{content}</p>
             </li>
           ))}
         </ul><br />
