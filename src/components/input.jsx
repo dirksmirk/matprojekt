@@ -1,12 +1,16 @@
 import { useState, useRef } from 'react'
 import List from './list'
 import MealMenu from './selectedMeal'
-
+//Våran function för input, som för tillfället hanterar sökrutan och fetch, sedan visar våran lista av recept samt visar receptet när man klickar på ett i listan
 function Input() {
+    //Vi börjar med att sätta några variabler här i början. useState använder vi för dynamisk data 
+    //Food, setFood är för att dynamiskt samla datan ifrån våran fetch, så varje gång man söker sätter vi datan på nytt
+    //Recipe, setRecipe använder vi för våra recept som ska visas när man klickar på ett recept i listan. Så när man klickar på ett recept i listan så setRecipe, som vi sedan kan visa med Recipe
+    //Sedan vill vi spara våran använderas input i search som en useRef för att kunna referera till igenom projektet
     const [Food, setFood] = useState(null)
     const [Recipe, setRecipe] = useState(null)
     const input = useRef()
-
+    //Våran första variabel är getFood som är våran Fetch variabel. Det är här vi använder användarens input för att hämta data från APIet.
     const getFood = () => {
       const name = input.current.value
         fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`)
@@ -21,21 +25,19 @@ function Input() {
           console.log(error)
         })
     }
-    
-    const handleRecipeClick = (recipe) => {
-      setRecipe(recipe);
-    };
 
      return (
        <>
         <div className='meal-container'>
-            {/* Input for entering food name, input is gathered in the input field but activates when clicking the button */}
+            {/* Input för att samla användarens sök, man klickar sedan på knappen för att aktivera och köra fetch */}
             <input type="text" ref={input} placeholder="Enter an ID" />
             <br />
             <button onClick={getFood}>Search</button>
             <br />
+            {/* Dessa två divar rendererar våran lista av recept samt visar vårat recept. Food && och Recipe && gör så att dem också endast rendererar när Food och Recipe har ett värde */}
             <div className="Food-List">
-              {Food && <List Food={Food} handleRecipeClick={handleRecipeClick} title="all food" />}
+              {/* handleRecipeClick använder vi för att skicka vidare setRecipe till våran list komponent, som  */}
+              {Food && <List Food={Food} handleRecipeClick={setRecipe} title="all food" />}
             </div>
             <div className='recipe-display'>
               {Recipe && <MealMenu Recipe={Recipe} title="recipe" /> }
