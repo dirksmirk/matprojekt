@@ -5,12 +5,12 @@ const MealMenu = ({ Recipe }) => {
   const ingredients = Object.keys(Recipe)
     .filter(key => key.startsWith('strIngredient') && Recipe[key])
     .map(key => Recipe[key])
-  //We want to also 
+  //We want to also sort out our measurements. Now these measurements also require a trim, because the API sends a lot of measurements as " ", a blank space, which we don't want as empty strings in our array
   const measures = Object.keys(Recipe)
   .filter(key => key.startsWith('strMeasure') && Recipe[key])
   .map(key => Recipe[key])
   .filter(measure => measure.trim() !== '')
-
+  //Then we want to combine our ingredients and measurements together for a better display in the ingredients tab
   const ingredientMeasure = Object.keys(ingredients, measures).map((ingredient, measure) => `${ingredients[ingredient]} - ${measures[measure]}`)
 
 /*     const ingredentMeasure = Object.keys(Recipe)
@@ -48,7 +48,9 @@ const MealMenu = ({ Recipe }) => {
             </li>
           ))}
         </ul><br />
-        <p>{Recipe.strInstructions}</p>
+        {Recipe.strInstructions.split('\r\n').map((instr, idx) => (
+            <p key={idx}>{instr}</p>
+        ))}
       </div>
     </>
   )
