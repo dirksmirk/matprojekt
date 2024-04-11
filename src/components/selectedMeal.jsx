@@ -49,7 +49,7 @@ const MealMenu = ({ Recipe }) => {
           ))}
         </ul><br />
         {Recipe.strInstructions.split('\r\n').map((instr, idx) => (
-            <p key={idx}>{instr}</p>
+            <p key={idx} className="">{instr}</p>
         ))}
       </div>
     </>
