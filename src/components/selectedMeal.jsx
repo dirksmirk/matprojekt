@@ -1,3 +1,5 @@
+import { Box, Typography } from "@mui/material"
+
 /* eslint-disable react/prop-types */
 const MealMenu = ({ Recipe }) => {
   //Vi använder .keys objektet här för att sortera ut våra ingredienser som börjar med strIngredient
@@ -18,40 +20,45 @@ const MealMenu = ({ Recipe }) => {
   .map((key, index) => `${Recipe[key]} ${Recipe[`strMeasure${index + 1}`]}`)
   .filter(combined => combined.trim() !== '') */
 
-
   //console.log för att dubbelkolla våran ingredients array fått in korrekta objekt med värden
   console.log(ingredients)
   console.log(measures)
   console.log(ingredientMeasure)
 
+  //om vi har eller inte har några tags vill posta olika meddelanden
   const TagNull = 'no tags';
   const Tags = Recipe.strTags;
-
 
   //Våran return returnerar vårat recept inom en div.
   //Vi vill ha namnet på receptet högst up, följt utav en bild, följt utav en lista av ingredienser med deras måt och till sist beskrivningen av receptet
   return (
     <>
-      <div className='meal-recipe' key={Recipe.idMeal}>
-        <h2>{Recipe.strMeal}</h2>
-        Category: {Recipe.strCategory}
+      <Box className='meal-recipe' key={Recipe.idMeal}>
+        <Typography variant="h2">{Recipe.strMeal}</Typography>
+        <Typography variant="subtitle2"> Category: {Recipe.strCategory} </Typography>
         <br />
         <img src={Recipe.strMealThumb} alt='picture of food' />
         <br />
+        <Typography variant="body2"> 
         Tags: {Recipe.strTags == null ? TagNull : Tags}
+        </Typography>
         <br />
-        <h3>Ingredients:</h3>
+        <Typography variant="h3">Ingredients:</Typography>
+        <Typography>
         <ul>
           {ingredientMeasure.map((content, idx) => (
             <li key={idx}>
               <p>{content}</p>
             </li>
           ))}
-        </ul><br />
-        {Recipe.strInstructions.split('\r\n').map((instr, idx) => (
-            <p key={idx} className="">{instr}</p>
-        ))}
-      </div>
+        </ul>
+        </Typography>
+        <Typography variant="body1">
+          {Recipe.strInstructions.split('\r\n').map((instr, idx) => (
+              <p key={idx} className="">{instr}</p>
+          ))}
+        </Typography>
+      </Box>
     </>
   )
 }
