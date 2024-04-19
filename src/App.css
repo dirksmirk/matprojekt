@@ -1,9 +1,10 @@
-body {
+#root {
     width: 75%;
     margin: 20px auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    border: 2px solid brown;
+    border-radius: 10px;
 }
 
 .Header {
@@ -19,5 +20,14 @@ body {
 }
 
 .meal-container {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+}
 
+img {
+        width: 25%;
+        border-radius: 25%;
+        align-self: center;
+        justify-self: center;
 }
