@@ -1,6 +1,6 @@
 import { useContext, useRef } from "react";
 import { SearchContext } from "../Context";
-import { Button, TextField } from '@mui/material';
+import { Box, Button, TextField, Typography } from '@mui/material';
 
 const Header = () => {
     const { myUpdateFunc } = useContext(SearchContext);
@@ -12,13 +12,13 @@ const Header = () => {
     };
 
     return (
-        <div className="Header">
-            <h1 className="webHead">Great recipes</h1>
-            <p>So many great recipes all in one place!</p>
-            <p>Please search and look around to find your favorite one</p>
+        <Box className="Header">
+            <Typography variant="h1" className="webHead">Great recipes</Typography>
+            <Typography variant="subtitle1">So many great recipes all in one place!</Typography>
+            <Typography variant="subtitle2">Please search and look around to find your favorite one</Typography>
             <TextField id="outlined-basic" label="Search" variant="outlined" size="small" inputRef={input} placeholder="Search for a recipe!" />
             <Button onClick={handleSearch} variant="contained" size="medium">Search</Button>
-        </div>
+        </Box>
         
     )
 };
